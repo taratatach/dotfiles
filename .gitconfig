@@ -1,0 +1,10 @@
+[user]
+	name = Erwan Guyader
+	email = taratatach@mozfr.org
+[color]
+	ui = true
+[core]
+	editor = /usr/bin/vim
+	excludesfile = /Users/erwan/.gitignore
+[diff]
+        compactionHeuristic = true

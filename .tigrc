@@ -1,0 +1,14 @@
+# For vim editions
+# set editor-line-number = no
+
+# Amend last commit with A
+bind status A !git commit --amend
+
+# Push commits to tracked upstream branch
+bind status P !sh -c "git push -u %(remote) `git rev-parse --abbrev-ref HEAD`"
+
+# Create and checkout a new branch; specify custom prompt
+bind main B !git checkout -b "%(prompt Enter new branch name: )"
+
+# Display history for specific file in log view
+bind log F !tig --follow --all -p "%(prompt Enter file name: )"
