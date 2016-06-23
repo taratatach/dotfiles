@@ -36,8 +36,9 @@ set splitright
 " persistent undo
 " /!\ should define &undodir
 set undofile
-set undodir=~/.vim/undo
-set backupdir=~/.vim/backup
+set undodir=~/.vim/undo//
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
 
 set formatoptions=croqlj  " j removes comment character when joining 2 comment lines
 set nojoinspaces          " removes spaces when joining lines
