@@ -1,0 +1,4 @@
+*.sw*
+*.un~
+.DS\_Store
+.byebug_history
