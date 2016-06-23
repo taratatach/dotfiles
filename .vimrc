@@ -7,6 +7,7 @@ let g:airline#extensions#tabline#enabled = 1
 " Use Powerline symbols in StatusLine
 let g:airline_powerline_fonts = 1
 
+set t_Co=256 " Force use of 256 colors
 syntax on
 colorscheme onedark
 
