@@ -4,6 +4,7 @@ DIR="$HOME/dotfiles"
 # Link dotfiles
 echo "[1] Linking dotfiles"
 ln -s $DIR/vim $HOME/.vim
+rm $HOME/.bashrc && ln -s $DIR/bashrc $HOME/.bashrc
 ln -s $DIR/tigrc $HOME/.tigrc
 ln -s $DIR/vimrc $HOME/.vimrc
 ln -s $DIR/global-gitconfig $HOME/.gitconfig
