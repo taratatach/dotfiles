@@ -1,5 +1,10 @@
 # For vim editions
 # set editor-line-number = no
+set commit-order = topo
+set line-graphics = utf-8
+set ignore-case = true
+set refresh-mode = auto
+set show-changes = true
 
 # Amend last commit with A
 bind status A !git commit --amend
