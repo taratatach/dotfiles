@@ -5,6 +5,11 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+# Source git bash completion
+if [ -f .git-completion.bash ]; then
+        . .git-completion.bash
+fi
+
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
@@ -17,3 +22,7 @@ if [ ! -z $BYOBU_RUN_DIR ];
 then
   unset PROMPT_COMMAND
 fi
+export LAYOUT_PATH=/home/erwan/dotfiles/lafayette.xkb
+/home/erwan/dotfiles/set-keyboard-layout.sh
+
+export PATH=$HOME/bin:$PATH

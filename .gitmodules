@@ -1,21 +1,43 @@
-[submodule ".vim/bundle/unite.vim"]
-  path = .vim/bundle/unite.vim
+[submodule "vim/bundle/unite.vim"]
+  path = vim/bundle/unite.vim
   url = https://github.com/Shougo/unite.vim
 
-[submodule ".vim/bundle/vim-airline"]
-  path = .vim/bundle/vim-airline
+[submodule "vim/bundle/vim-airline"]
+  path = vim/bundle/vim-airline
   url = https://github.com/vim-airline/vim-airline
 
-[submodule ".vim/bundle/vim-coffee-script"]
-  path = .vim/bundle/vim-coffee-script
+[submodule "vim/bundle/vim-coffee-script"]
+  path = vim/bundle/vim-coffee-script
   url = https://github.com/kchmck/vim-coffee-script.git
 
-[submodule ".vim/bundle/vim-gitgutter"]
-  path = .vim/bundle/vim-gitgutter
+[submodule "vim/bundle/vim-gitgutter"]
+  path = vim/bundle/vim-gitgutter
   url = git://github.com/airblade/vim-gitgutter.git
 
-[submodule ".vim/bundle/vimproc.vim"]
-  path = .vim/bundle/vimproc.vim
+[submodule "vim/bundle/vimproc.vim"]
+  path = vim/bundle/vimproc.vim
   url = https://github.com/Shougo/vimproc.vim.git
 
+[submodule "vim/bundle/deoplete.vim"]
+  path = vim/bundle/deoplete.vim
+  url = https://github.com/Shougo/deoplete.vim.git
 
+[submodule "vim/bundle/vim-easydir"]
+  path = vim/bundle/vim-easydir
+  url = https://github.com/duggiefresh/vim-easydir.git
+
+[submodule "vim/bundle/vim-filebeagle"]
+  path = vim/bundle/vim-filebeagle
+  url = https://github.com/jeetsukumaran/vim-filebeagle.git
+
+[submodule "vim/bundle/vim-javascript"]
+  path = vim/bundle/vim-javascript
+  url = https://github.com/pangloss/vim-javascript.git
+
+[submodule "vim/bundle/typescript-vim"]
+  path = vim/bundle/typescript-vim
+  url = https://github.com/leafgarland/typescript-vim.git
+
+[submodule "vim/bundle/tsuquyomi"]
+  path = vim/bundle/tsuquyomi
+  url = https://github.com/Quramy/tsuquyomi.git
