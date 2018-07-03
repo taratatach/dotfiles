@@ -15,6 +15,8 @@ set number
 set ruler
 set showmode
 set wrap
+" Allow for mouse scrolling
+set mouse=a
 " Incremental search
 set incsearch
 " Highlight search results while typing a regexp
@@ -57,10 +59,36 @@ set hidden
 " Ask for confirmation before closing unsaved buffers!
 set confirm
 
+" Play nice with file watchers like Webpack's
+" Slower writes though
+set backupcopy=yes
+
+" JSX pretty syntax highlighting
+let g:vim_jsx_pretty_colorful_config = 1
 
 " Remove trailing whitespaces in dev files
-autocmd FileType ruby,cucumber,haml,html,javascript,css,scss autocmd BufWritePre <buffer> :%s/\s\+$//e
+autocmd FileType ruby,cucumber,haml,html,javascript,coffee,css,scss,php autocmd BufWritePre <buffer> :%s/\s\+$//e
 
+" Go
+autocmd FileType go setlocal tabstop=4
+set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
+autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
+nnoremap <Leader>b :GoBuild<CR>
+
+" Elm
+let g:elm_jump_to_error = 1
+let g:elm_make_show_warnings = 1
+let g:elm_format_autosave = 1
+autocmd BufWritePre,FileWritePre *.elm :ElmFormat
+
+" Easier search navigation
+nnoremap , ;
+nnoremap ; ,
+vnoremap , ;
+vnoremap ; ,
+
+" Clear search results highlighting
+nnoremap <C-_> :noh
 
 " Easier split navigation
 nnoremap <C-J> <C-W><C-J>
@@ -78,16 +106,27 @@ nmap <S-U> :redo<Return>
 " create new tab
 nmap <C-n> :tabe 
 
+" Prevent FileBeaggle from remapping <Leader>f
+let g:filebeagle_suppress_keymaps = 1
+" Reenable FileBeaggle - mapping
+map <silent> - <Plug>FileBeagleOpenCurrentBufferDir
 " launch Unite on files like Ctrl-P
 nmap <Leader>f :Unite -start-insert -custom-matchers=matcher_fuzzy,matcher_hide_current_file buffer file_rec/async<Return> 
 
+" Rubocop mapping
+let g:vimrubocop_keymap = 0
+nmap <Leader>r :RuboCop<CR>
+
 " refresh the current file
-nmap <C-r> :edit!<Return>
+nnoremap <C-r> :edit!<Return>
 
 " Navigate through buffers with Tab and Shift + Tab
-nmap <Tab> :bn!<Return>
-nmap <S-Tab> :bp!<Return>
+nnoremap <Tab> :bn!<Return>
+nnoremap <S-Tab> :bp!<Return>
 
 " Close buffer
-nmap <Leader>w :bdelete<Return>
-nmap <Leader>W :bdelete!<Return>
+nmap <Leader>w :bwipeout<Return>
+nmap <Leader>W :bwipeout!<Return>
+
+" Copy end of line
+nmap Y y$
