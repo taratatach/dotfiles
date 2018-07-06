@@ -66,6 +66,10 @@ set backupcopy=yes
 " JSX pretty syntax highlighting
 let g:vim_jsx_pretty_colorful_config = 1
 
+" Open QuickFix window on errors
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
+
 " Remove trailing whitespaces in dev files
 autocmd FileType ruby,cucumber,haml,html,javascript,coffee,css,scss,php autocmd BufWritePre <buffer> :%s/\s\+$//e
 
@@ -73,13 +77,20 @@ autocmd FileType ruby,cucumber,haml,html,javascript,coffee,css,scss,php autocmd 
 autocmd FileType go setlocal tabstop=4
 set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
 autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
-nnoremap <Leader>b :GoBuild<CR>
+autocmd FileType go nnoremap <Leader>b :GoBuild<CR>
 
 " Elm
 let g:elm_jump_to_error = 1
 let g:elm_make_show_warnings = 1
 let g:elm_format_autosave = 1
 autocmd BufWritePre,FileWritePre *.elm :ElmFormat
+
+" TypeScript
+autocmd FileType typescript nnoremap <Leader>b :make<CR>
+autocmd FileType typescript nnoremap <Leader>d :TSDef<CR>
+
+" Enable deoplete at startup for completion
+let g:deoplete#enable_at_startup = 1
 
 " Easier search navigation
 nnoremap , ;
