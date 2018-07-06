@@ -6,8 +6,8 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # Source git bash completion
-if [ -f .git-completion.bash ]; then
-        . .git-completion.bash
+if [ -f "$HOME/.git-completion.bash" ]; then
+        . "$HOME/.git-completion.bash"
 fi
 
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
@@ -26,3 +26,7 @@ export LAYOUT_PATH=/home/erwan/dotfiles/lafayette.xkb
 /home/erwan/dotfiles/set-keyboard-layout.sh
 
 export PATH=$HOME/bin:$PATH
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
