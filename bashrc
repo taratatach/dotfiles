@@ -5,6 +5,11 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+# Source global definitions
+if [ -f "$HOME/.bash_aliases" ]; then
+	. "$HOME/.bash_aliases"
+fi
+
 # Source git bash completion
 if [ -f "$HOME/.git-completion.bash" ]; then
         . "$HOME/.git-completion.bash"
@@ -30,3 +35,5 @@ export PATH=$HOME/bin:$PATH
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

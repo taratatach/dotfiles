@@ -41,3 +41,9 @@
 [submodule "vim/bundle/vim-easydir"]
 	path = vim/bundle/vim-easydir
 	url = https://github.com/duggiefresh/vim-easydir
+[submodule "vim/bundle/fzf.vim"]
+	path = vim/bundle/fzf.vim
+	url = https://github.com/junegunn/fzf.vim.git
+[submodule "vim/bundle/echodoc.vim"]
+	path = vim/bundle/echodoc.vim
+	url = https://github.com/Shougo/echodoc.vim

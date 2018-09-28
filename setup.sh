@@ -24,6 +24,11 @@ echo "[2] Configuring Vim..."
 CURRENTDIR=$(pwd)
 cd $DIR
 
+# Install python binding for neovim
+echo "-- Installing Neovim python binding"
+sudo easy_install pip
+sudo pip install neovim
+
 # Download Vim plugins
 echo "-- Installing plugins"
 git submodule init
@@ -32,6 +37,10 @@ git submodule update
 # Install Vimproc plugin
 echo "-- Installing Vimproc"
 cd vim/bundle/vimproc.vim/ && make
+
+# Check for presence of xsel to access system clipboard
+echo "-- Checking for xsel presence"
+# [ command -v xsel ]
 
 cd $CURRENTDIR
 echo "[2] Done."

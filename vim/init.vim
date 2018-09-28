@@ -1,5 +1,8 @@
 execute pathogen#infect()
 
+" Simple Leader key
+let mapleader = " "
+
 " StatusLine is displayed at all times
 set laststatus=2
 " TabLine shows open buffers when only one tab is open
@@ -13,7 +16,7 @@ colorscheme onedark
 
 set number
 set ruler
-set showmode
+set noshowmode
 set wrap
 " Allow for mouse scrolling
 set mouse=a
@@ -46,7 +49,8 @@ set formatoptions=croqlj  " j removes comment character when joining 2 comment l
 set nojoinspaces          " removes spaces when joining lines
 
 " show tabs / nbsp / trailing spaces
-" set list 
+set listchars=trail:¶,nbsp:¤
+set list
 
 " Backspace can delete auto-indents, past modifications and eol
 " /!\ Ctrl-H is the ascii character for Backspace. Do not remap!
@@ -71,13 +75,16 @@ autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
 
 " Remove trailing whitespaces in dev files
-autocmd FileType ruby,cucumber,haml,html,javascript,coffee,css,scss,php autocmd BufWritePre <buffer> :%s/\s\+$//e
+autocmd FileType ruby,cucumber,haml,html,javascript,coffee,typescript,typescriptreact,css,scss,php autocmd BufWritePre <buffer> :%s/\s\+$//e
+
+inoremap jk <Esc>
+vnoremap jk <Esc>
 
 " Go
 autocmd FileType go setlocal tabstop=4
 set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
 autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
-autocmd FileType go nnoremap <Leader>b :GoBuild<CR>
+autocmd FileType go nnoremap <buffer> <Leader>b :GoBuild<CR>
 
 " Elm
 let g:elm_jump_to_error = 1
@@ -86,11 +93,41 @@ let g:elm_format_autosave = 1
 autocmd BufWritePre,FileWritePre *.elm :ElmFormat
 
 " TypeScript
-autocmd FileType typescript nnoremap <Leader>b :make<CR>
-autocmd FileType typescript nnoremap <Leader>d :TSDef<CR>
+autocmd FileType typescript,typescriptreact nnoremap <buffer> <Leader>b :make<CR>
+autocmd FileType typescript,typescriptreact nnoremap <buffer> <Leader>d :TSDef<CR>
+autocmd FileType typescript,typescriptreact nnoremap <buffer> <Leader>r :TSRefs<CR>
+autocmd FileType typescript,typescriptreact nnoremap <buffer> <Leader>m :TSImport<CR>
+let g:nvim_typescript#type_info_on_hold = 0
+let g:nvim_typescript#signature_complete = 1
+let g:nvim_typescript#diagnosticsEnable = 0
 
 " Enable deoplete at startup for completion
 let g:deoplete#enable_at_startup = 1
+
+" Enable fzf search
+set rtp+=~/bin/fzf
+" Mapping to search with fzf
+nnoremap <Leader>f :GFiles<CR>
+nnoremap <Leader>F :Files<CR>
+nnoremap <Leader>s :Lines<CR>
+" Use ripgrep to search in files
+"command! -bang -nargs=* Rg
+"  \ call fzf#vim#grep(
+"  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+"  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+"  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+"  \   <bang>0)
+"
+"command! -bang -nargs=* Search
+"  \ call fzf#run({
+"  \ 'source': 'rg --column --no-heading --color=never --smart-case '.shellescape(<q-args>),
+"  \ 'sink': 'e',
+"  \ 'down': '40%',
+"  \ })
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
 
 " Easier search navigation
 nnoremap , ;
@@ -99,7 +136,7 @@ vnoremap , ;
 vnoremap ; ,
 
 " Clear search results highlighting
-nnoremap <C-_> :noh
+nnoremap <C-_> :nohlsearch<CR>
 
 " Easier split navigation
 nnoremap <C-J> <C-W><C-J>
@@ -115,18 +152,18 @@ vmap < <gv
 nmap <S-U> :redo<Return>
 
 " create new tab
-nmap <C-n> :tabe 
+nmap <C-n> :tabe
 
 " Prevent FileBeaggle from remapping <Leader>f
 let g:filebeagle_suppress_keymaps = 1
 " Reenable FileBeaggle - mapping
 map <silent> - <Plug>FileBeagleOpenCurrentBufferDir
 " launch Unite on files like Ctrl-P
-nmap <Leader>f :Unite -start-insert -custom-matchers=matcher_fuzzy,matcher_hide_current_file buffer file_rec/async<Return> 
+" nmap <Leader>f :Unite -start-insert -custom-matchers=matcher_fuzzy,matcher_hide_current_file buffer file_rec/async<Return> 
 
 " Rubocop mapping
 let g:vimrubocop_keymap = 0
-nmap <Leader>r :RuboCop<CR>
+nnoremap <Leader>r :RuboCop<CR>
 
 " refresh the current file
 nnoremap <C-r> :edit!<Return>
