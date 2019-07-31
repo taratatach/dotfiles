@@ -49,7 +49,7 @@ set formatoptions=croqlj  " j removes comment character when joining 2 comment l
 set nojoinspaces          " removes spaces when joining lines
 
 " show tabs / nbsp / trailing spaces
-set listchars=trail:¶,nbsp:¤
+set listchars=tab:  ,trail:¶,nbsp:¤
 set list
 
 " Backspace can delete auto-indents, past modifications and eol
@@ -70,6 +70,13 @@ set backupcopy=yes
 " JSX pretty syntax highlighting
 let g:vim_jsx_pretty_colorful_config = 1
 
+" Disable folding in markdown files
+let g:vim_markdown_folding_disabled = 1
+" Enable concealing in markdown files
+autocmd FileType markdown setlocal conceallevel=2
+" Set lists indentation to 2 spaces
+let g:vim_markdown_new_list_item_indent = 2
+
 " Open QuickFix window on errors
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
@@ -77,14 +84,33 @@ autocmd QuickFixCmdPost    l* nested lwindow
 " Remove trailing whitespaces in dev files
 autocmd FileType ruby,cucumber,haml,html,javascript,coffee,typescript,typescriptreact,css,scss,php autocmd BufWritePre <buffer> :%s/\s\+$//e
 
-inoremap jk <Esc>
-vnoremap jk <Esc>
+" inoremap jk <Esc>
+" vnoremap jk <Esc>
+
+" Language Server Client
+" let g:LanguageClient_serverCommands = {
+"     \ 'javascript': ['flow', 'lsp', '--from', './node_modules/.bin'],
+"     \ 'javascript.jsx': ['flow', 'lsp', '--from', './node_modules/.bin'],
+"     \ }
+" let g:LanguageClient_autoStart = 1
+" let g:LanguageClient_rootMarkers = ['.flowconfig']
+
+" nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+" nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
+" nnoremap <silent> <Leader>r :call LanguageClient#textDocument_rename()<CR>
 
 " Go
 autocmd FileType go setlocal tabstop=4
+let g:go_fmt_command = "goimports"
 set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
 autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
+let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+let g:deoplete#sources#go#builtin_objects = 1
 autocmd FileType go nnoremap <buffer> <Leader>b :GoBuild<CR>
+autocmd FileType go nnoremap <buffer> <Leader>i :GoInstall<CR>
+autocmd FileType go nnoremap <buffer> <Leader>r :GoRename<CR>
+autocmd FileType go nnoremap <buffer> <Leader>d :GoDef<CR>
 
 " Elm
 let g:elm_jump_to_error = 1
@@ -93,13 +119,13 @@ let g:elm_format_autosave = 1
 autocmd BufWritePre,FileWritePre *.elm :ElmFormat
 
 " TypeScript
-autocmd FileType typescript,typescriptreact nnoremap <buffer> <Leader>b :make<CR>
-autocmd FileType typescript,typescriptreact nnoremap <buffer> <Leader>d :TSDef<CR>
-autocmd FileType typescript,typescriptreact nnoremap <buffer> <Leader>r :TSRefs<CR>
-autocmd FileType typescript,typescriptreact nnoremap <buffer> <Leader>m :TSImport<CR>
-let g:nvim_typescript#type_info_on_hold = 0
-let g:nvim_typescript#signature_complete = 1
-let g:nvim_typescript#diagnosticsEnable = 0
+" autocmd FileType typescript,typescriptreact nnoremap <buffer> <Leader>b :make<CR>
+" autocmd FileType typescript,typescriptreact nnoremap <buffer> <Leader>d :TSDef<CR>
+" autocmd FileType typescript,typescriptreact nnoremap <buffer> <Leader>r :TSRefs<CR>
+" autocmd FileType typescript,typescriptreact nnoremap <buffer> <Leader>m :TSImport<CR>
+" let g:nvim_typescript#type_info_on_hold = 0
+" let g:nvim_typescript#signature_complete = 1
+" let g:nvim_typescript#diagnosticsEnable = 0
 
 " Enable deoplete at startup for completion
 let g:deoplete#enable_at_startup = 1
@@ -162,8 +188,8 @@ map <silent> - <Plug>FileBeagleOpenCurrentBufferDir
 " nmap <Leader>f :Unite -start-insert -custom-matchers=matcher_fuzzy,matcher_hide_current_file buffer file_rec/async<Return> 
 
 " Rubocop mapping
-let g:vimrubocop_keymap = 0
-nnoremap <Leader>r :RuboCop<CR>
+" let g:vimrubocop_keymap = 0
+" nnoremap <Leader>r :RuboCop<CR>
 
 " refresh the current file
 nnoremap <C-r> :edit!<Return>
