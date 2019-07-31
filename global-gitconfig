@@ -1,6 +1,6 @@
 [user]
 	name = Erwan Guyader
-	email = taratatach@mozfr.org
+	email = erwan.guyader@cozycloud.cc
 [color]
 	ui = true
 [core]
@@ -14,3 +14,4 @@
         go = checkout
         mk = checkout -b
         amend = commit --amend
+        fixup = "!f() { git commit --fixup=$1; }; f"
